@@ -1,6 +1,6 @@
 // app/index.tsx
 import React from "react";
-import { AppearanceProvider } from "react-native-appearance";
+import { AppearanceProvider } from "react-native";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
 import { View, Text } from "react-native";
