@@ -9,7 +9,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.base};
 `;
 
 const ThemedText = styled.Text`
