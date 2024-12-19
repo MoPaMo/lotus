@@ -1,6 +1,5 @@
 // app/index.tsx
 import React from "react";
-import { AppearanceProvider } from "react-native";
 import { ThemeProvider } from "@/components/theme/ThemeContext";
 import ThemeWrapper from "@/components/theme/ThemeWrapper";
 import { View, Text } from "react-native";
@@ -19,15 +18,13 @@ const ThemedText = styled.Text`
 
 const App = () => {
   return (
-    <AppearanceProvider>
-      <ThemeProvider>
-        <ThemeWrapper>
-          <Container>
-            <ThemedText>Hello, Catppuccin!</ThemedText>
-          </Container>
-        </ThemeWrapper>
-      </ThemeProvider>
-    </AppearanceProvider>
+    <ThemeProvider>
+      <ThemeWrapper>
+        <Container>
+          <ThemedText>Hello, Catppuccin!</ThemedText>
+        </Container>
+      </ThemeWrapper>
+    </ThemeProvider>
   );
 };
 
