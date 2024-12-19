@@ -1,11 +1,17 @@
-// ThemeContext.js
-import React, { createContext, useState, useEffect } from "react";
+// ThemeContext.tsx
+import React, { createContext, useState, useEffect, ReactNode } from "react";
 import { Appearance, AppearanceProvider } from "react-native-appearance";
 
-const ThemeContext = createContext();
+type ThemeContextType = {
+  theme: "light" | "dark" | null;
+};
 
-const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(Appearance.getColorScheme());
+const ThemeContext = createContext<ThemeContextType>({ theme: null });
+
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState<"light" | "dark" | null>(
+    Appearance.getColorScheme()
+  );
 
   useEffect(() => {
     const subscription = Appearance.addChangeListener(({ colorScheme }) => {
