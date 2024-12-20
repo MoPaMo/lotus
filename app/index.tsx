@@ -1,6 +1,6 @@
 // app/index.tsx
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import styled from "styled-components/native";
 import BlobContainer from "@/components/theme/BlobContainer";
 const Container = styled.View`
@@ -13,14 +13,30 @@ const Container = styled.View`
 const ThemedText = styled.Text`
   color: ${(props) => props.theme.text};
 `;
+const Grid = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+`;
 
 const HomeScreen = () => {
   return (
     <Container>
-      <ThemedText>Hello, Catppuccin!</ThemedText>
-      <BlobContainer>
-        <Text>Hi</Text>
-      </BlobContainer>
+      <FlatList
+        data={[
+          { text: "First" },
+          { text: "Second" },
+          { text: "Third" },
+          { text: "Fourth" },
+        ]}
+        numColumns={2}
+        renderItem={({ item }) => (
+          <BlobContainer>
+            <Text>{item.text}</Text>
+          </BlobContainer>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
     </Container>
   );
 };
