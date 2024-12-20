@@ -2,7 +2,8 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styled from "styled-components/native";
-import BlobContainer from "@/components/BlobContainer";
+import SquareView from "@/components/MeditationsSquare";
+
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -30,11 +31,7 @@ const HomeScreen = () => {
           { text: "Fourth" },
         ]}
         numColumns={2}
-        renderItem={({ item }) => (
-          <BlobContainer>
-            <Text>{item.text}</Text>
-          </BlobContainer>
-        )}
+        renderItem={({ item }) => <SquareView></SquareView>}
         keyExtractor={(item, index) => index.toString()}
       />
     </Container>
