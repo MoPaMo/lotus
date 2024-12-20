@@ -6,5 +6,5 @@ interface BlobContainerProps {
 
 const BlobContainer = styled.View<BlobContainerProps>`
   background-color: ${(props) => props.theme.rosewater};
-  rotate: ${(props) => (props.rotate || "0") + "deg"};
+  rotate: ${(props) => (props.rotate !== undefined ? props.rotate : 0) + "deg"};
 `;
