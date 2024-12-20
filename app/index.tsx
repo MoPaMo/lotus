@@ -19,7 +19,7 @@ const HomeScreen = () => {
     <Container>
       <ThemedText>Hello, Catppuccin!</ThemedText>
       <BlobContainer>
-        Hi
+        <Text>Hi</Text>
       </BlobContainer>
     </Container>
   );
