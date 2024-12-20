@@ -9,5 +9,4 @@ const BlobContainer = styled.View<BlobContainerProps>`
   rotate: ${(props) => (props.rotate !== undefined ? props.rotate : 0) + "deg"};
 `;
 
-
 export default BlobContainer;

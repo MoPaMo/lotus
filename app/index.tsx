@@ -2,7 +2,7 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styled from "styled-components/native";
-import BlobContainer from "@/components/theme/BlobContainer";
+import BlobContainer from "@/components/BlobContainer";
 const Container = styled.View`
   flex: 1;
   justify-content: center;
