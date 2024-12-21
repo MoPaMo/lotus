@@ -9,7 +9,7 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType>({ theme: null });
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<"light" | "dark" | null>(
+  const [theme, setTheme] = useState<"light" | "dark" | null | undefined>(
     Appearance.getColorScheme()
   );
 
