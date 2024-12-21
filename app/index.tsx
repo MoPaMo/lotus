@@ -9,6 +9,8 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.base};
+  width: 100%;
+  padding: 20px;
 `;
 
 const ThemedText = styled.Text`
@@ -24,6 +26,7 @@ const HomeScreen = () => {
   return (
     <Container>
       <FlatList
+        style={{ width: "100%" }}
         data={[
           { text: "First" },
           { text: "Second" },
