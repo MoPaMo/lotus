@@ -19,7 +19,7 @@ const SquareWithSymbol = () => {
 
   const handleLayout = (e) => {
     const { width, height } = e.nativeEvent.layout;
-    setIconSize(Math.min(width, height) * 0.8);
+    setIconSize(Math.min(width, height) * 0.69);
   };
 
   return (
