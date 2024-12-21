@@ -7,13 +7,16 @@ const SquareContainer = styled.View`
   aspect-ratio: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.rosewater};
+  background-color: ${(props) => props.theme.pink};
+  padding: 16px;
+  border-radius: 16px;
+  margin: 8px;
 `;
 
 const SquareWithSymbol = () => {
   return (
     <SquareContainer>
-      <MaterialIcons name="home" size={48} color="#FFFFFF" />
+      <MaterialIcons name="self-improvement" size={48} color="#FFFFFF" />
     </SquareContainer>
   );
 };
