@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components/native";
+import React, { useState } from "react";
+import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const SquareContainer = styled.View`
@@ -14,9 +14,21 @@ const SquareContainer = styled.View`
 `;
 
 const SquareWithSymbol = () => {
+  const [iconSize, setIconSize] = useState(0);
+  const theme = useTheme();
+
+  const handleLayout = (e) => {
+    const { width, height } = e.nativeEvent.layout;
+    setIconSize(Math.min(width, height) * 0.8);
+  };
+
   return (
-    <SquareContainer>
-      <MaterialIcons name="self-improvement" size={48} color="#FFFFFF" />
+    <SquareContainer onLayout={handleLayout}>
+      <MaterialIcons
+        name="self-improvement"
+        size={iconSize}
+        color={theme.base}
+      />
     </SquareContainer>
   );
 };
