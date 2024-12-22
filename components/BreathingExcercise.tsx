@@ -33,6 +33,22 @@ const BreathingExercise: React.FC<BreathingExerciseProps> = ({ cycles }) => {
   useEffect(() => {
     let count = 0;
     const breathe = () => {
+      count += 1;
+
+      switch (count % 3) {
+        case 1:
+          setStep("Breathe In");
+          break;
+        case 2:
+          setStep("Hold");
+          break;
+        case 0:
+          setStep("Breathe Out");
+          break;
+        default:
+          setStep("Breathe In");
+      }
+
       Animated.sequence([
         Animated.parallel([
           Animated.timing(scale, {
@@ -63,22 +79,10 @@ const BreathingExercise: React.FC<BreathingExerciseProps> = ({ cycles }) => {
         ]),
         Animated.delay(2000),
       ]).start(() => {
-        count += 1;
-        if (count < cycles) {
+        if (count < cycles * 3) {
           breathe();
         }
       });
-      switch (count % 3) {
-        case 0:
-          setStep("Breathe In");
-          break;
-        case 1:
-          setStep("Hold");
-          break;
-        case 2:
-          setStep("Breathe Out");
-          break;
-      }
     };
     breathe();
   }, [scale, opacity, cycles]);
