@@ -10,13 +10,13 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.base};
 `;
 const AnimatedCircle = styled(Animated.View)`
   width: ${CIRCLE_SIZE}px;
   height: ${CIRCLE_SIZE}px;
   border-radius: ${CIRCLE_SIZE / 2}px;
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.flamingo};
   margin-bottom: 40px;
 `;
 const GuidanceText = styled(Animated.Text)`
