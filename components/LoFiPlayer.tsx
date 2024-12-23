@@ -1,9 +1,11 @@
+// LofiPlayer.js
 import React, { useState, useEffect, useRef } from "react";
-import { TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import Slider from "@react-native-community/slider";
 import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Audio, AVPlaybackStatus } from "expo-av";
+import StyledButton from "./StyledButton";
 
 const Container = styled.View`
   flex: 1;
@@ -25,7 +27,7 @@ const ProgressBar = styled(Slider)`
   margin-top: 20px;
 `;
 
-const LofiPlayer: React.FC = () => {
+const LofiPlayer = () => {
   const theme = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
@@ -136,28 +138,31 @@ const LofiPlayer: React.FC = () => {
 
   return (
     <Container>
-      <TouchableOpacity onPress={playPause}>
+      <StyledButton onPress={playPause}>
         <MaterialIcons
           name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
           size={64}
-          color={theme.primary}
+          color="#fff"
         />
-      </TouchableOpacity>
+      </StyledButton>
       <Controls>
-        <TouchableOpacity onPress={playPrevious}>
-          <MaterialIcons name="skip-previous" size={32} color={theme.primary} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={playPause}>
+        <StyledButton onPress={playPrevious}>
+          <MaterialIcons name="skip-previous" size={32} color="#fff" />
+        </StyledButton>
+
+        <StyledButton onPress={playPause}>
           <MaterialIcons
             name={isPlaying ? "pause" : "play-arrow"}
             size={32}
-            color={theme.primary}
+            color="#fff"
           />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={playNext}>
-          <MaterialIcons name="skip-next" size={32} color={theme.primary} />
-        </TouchableOpacity>
+        </StyledButton>
+
+        <StyledButton onPress={playNext}>
+          <MaterialIcons name="skip-next" size={32} color="#fff" />
+        </StyledButton>
       </Controls>
+
       <ProgressBar
         minimumValue={0}
         maximumValue={duration}
