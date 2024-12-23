@@ -37,9 +37,9 @@ const ButtonText = styled(Text)`
 `;
 
 const NoisePlayer: React.FC = () => {
-  const [sound, setSound] = (useState < Audio.Sound) | (null > null);
+  const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentNoise, setCurrentNoise] = useState < string > "white";
+  const [currentNoise, setCurrentNoise] = useState<string>("white");
 
   useEffect(() => {
     return () => {
