@@ -54,7 +54,14 @@ const HomeScreen = () => {
             href: "/relaxation/54321",
             symbol: "list-ol",
             color: "red",
-          }
+          },
+            {
+                title: "Meditation",
+                href: "/relaxation/meditation",
+                symbol: "om",
+                color: "yellow",
+            },
+            
         ]}
         numColumns={2}
         renderItem={({ item }) => (
