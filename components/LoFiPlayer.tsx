@@ -5,7 +5,6 @@ import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Audio, AVPlaybackStatus } from "expo-av";
 
-
 const Container = styled.View`
   flex: 1;
   background-color: ${(props) => props.theme.background};
@@ -27,26 +26,35 @@ const ProgressBar = styled(Slider)`
 `;
 
 const LofiPlayer: React.FC = () => {
-  const theme = useTheme(); 
+  const theme = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [duration, setDuration] = useState(0);
   const [position, setPosition] = useState(0);
+  const [currentTrack, setCurrentTrack] = useState(0);
   const isSeeking = useRef(false);
+  const playlist = [
+    require("./assets/lofi1.mp3"),
+    require("./assets/lofi2.mp3"),
+    require("./assets/lofi3.mp3"),
+  ];
 
   useEffect(() => {
-    loadSound();
+    loadSound(currentTrack);
     return () => {
       if (sound) {
         sound.unloadAsync();
       }
     };
-  }, [sound]);
+  }, [currentTrack]);
 
-  const loadSound = async () => {
+  const loadSound = async (trackIndex: number) => {
     try {
+      if (sound) {
+        await sound.unloadAsync();
+      }
       const { sound: newSound, status } = await Audio.Sound.createAsync(
-        require("./assets/lofi.mp3"),
+        playlist[trackIndex],
         { shouldPlay: false },
         onPlaybackStatusUpdate
       );
@@ -64,7 +72,7 @@ const LofiPlayer: React.FC = () => {
       setPosition(status.positionMillis || 0);
       setDuration(status.durationMillis || 0);
       if (status.didJustFinish) {
-        setIsPlaying(false);
+        playNext();
       }
     }
   };
@@ -78,6 +86,18 @@ const LofiPlayer: React.FC = () => {
       }
       setIsPlaying(!isPlaying);
     }
+  };
+
+  const playNext = async () => {
+    const nextTrack = (currentTrack + 1) % playlist.length;
+    setCurrentTrack(nextTrack);
+    setIsPlaying(true);
+  };
+
+  const playPrevious = async () => {
+    const prevTrack = (currentTrack - 1 + playlist.length) % playlist.length;
+    setCurrentTrack(prevTrack);
+    setIsPlaying(true);
   };
 
   const skipForward = async () => {
@@ -114,30 +134,22 @@ const LofiPlayer: React.FC = () => {
         <MaterialIcons
           name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
           size={64}
-          color={theme.primary} 
+          color={theme.primary}
         />
       </TouchableOpacity>
       <Controls>
-        <TouchableOpacity onPress={skipBackward}>
-          <MaterialIcons
-            name="skip-previous"
-            size={32}
-            color={theme.primary} 
-          />
+        <TouchableOpacity onPress={playPrevious}>
+          <MaterialIcons name="skip-previous" size={32} color={theme.primary} />
         </TouchableOpacity>
         <TouchableOpacity onPress={playPause}>
           <MaterialIcons
             name={isPlaying ? "pause" : "play-arrow"}
             size={32}
-            color={theme.primary} 
+            color={theme.primary}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={skipForward}>
-          <MaterialIcons
-            name="skip-next"
-            size={32}
-            color={theme.primary} 
-          />
+        <TouchableOpacity onPress={playNext}>
+          <MaterialIcons name="skip-next" size={32} color={theme.primary} />
         </TouchableOpacity>
       </Controls>
       <ProgressBar
@@ -146,9 +158,9 @@ const LofiPlayer: React.FC = () => {
         value={position}
         onValueChange={onSliderValueChange}
         onSlidingComplete={onSliderSlidingComplete}
-        minimumTrackTintColor={theme.accent} 
-        maximumTrackTintColor={theme.muted} 
-        thumbTintColor={theme.primary} 
+        minimumTrackTintColor={theme.accent}
+        maximumTrackTintColor={theme.muted}
+        thumbTintColor={theme.primary}
       />
     </Container>
   );
