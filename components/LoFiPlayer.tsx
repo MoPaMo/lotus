@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import Slider from "@react-native-community/slider";
-import styled from "styled-components/native";
+import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Audio, AVPlaybackStatus } from "expo-av";
+
 
 const Container = styled.View`
   flex: 1;
@@ -26,6 +27,7 @@ const ProgressBar = styled(Slider)`
 `;
 
 const LofiPlayer: React.FC = () => {
+  const theme = useTheme(); 
   const [isPlaying, setIsPlaying] = useState(false);
   const [sound, setSound] = useState<Audio.Sound | null>(null);
   const [duration, setDuration] = useState(0);
@@ -39,23 +41,27 @@ const LofiPlayer: React.FC = () => {
         sound.unloadAsync();
       }
     };
-  }, []);
+  }, [sound]);
 
   const loadSound = async () => {
-    const { sound: newSound, status } = await Audio.Sound.createAsync(
-      require("./assets/lofi.mp3"),
-      { shouldPlay: false },
-      onPlaybackStatusUpdate
-    );
-    setSound(newSound);
-    if ('durationMillis' in status) {
-      setDuration(status.durationMillis || 0);
+    try {
+      const { sound: newSound, status } = await Audio.Sound.createAsync(
+        require("./assets/lofi.mp3"),
+        { shouldPlay: false },
+        onPlaybackStatusUpdate
+      );
+      setSound(newSound);
+      if (status.isLoaded && status.durationMillis) {
+        setDuration(status.durationMillis);
+      }
+    } catch (error) {
+      console.error("Error loading sound:", error);
     }
   };
 
   const onPlaybackStatusUpdate = (status: AVPlaybackStatus) => {
     if (!isSeeking.current && status.isLoaded) {
-      setPosition(status.positionMillis);
+      setPosition(status.positionMillis || 0);
       setDuration(status.durationMillis || 0);
       if (status.didJustFinish) {
         setIsPlaying(false);
@@ -90,7 +96,7 @@ const LofiPlayer: React.FC = () => {
     }
   };
 
-  const onSliderValueChange = async (value: number) => {
+  const onSliderValueChange = (value: number) => {
     isSeeking.current = true;
     setPosition(value);
   };
@@ -108,7 +114,7 @@ const LofiPlayer: React.FC = () => {
         <MaterialIcons
           name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
           size={64}
-          color={(props: { theme: { primary: any; }; }) => props.theme.primary}
+          color={theme.primary} 
         />
       </TouchableOpacity>
       <Controls>
@@ -116,21 +122,21 @@ const LofiPlayer: React.FC = () => {
           <MaterialIcons
             name="skip-previous"
             size={32}
-            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
+            color={theme.primary} 
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={playPause}>
           <MaterialIcons
             name={isPlaying ? "pause" : "play-arrow"}
             size={32}
-            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
+            color={theme.primary} 
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={skipForward}>
           <MaterialIcons
             name="skip-next"
             size={32}
-            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
+            color={theme.primary} 
           />
         </TouchableOpacity>
       </Controls>
@@ -140,9 +146,9 @@ const LofiPlayer: React.FC = () => {
         value={position}
         onValueChange={onSliderValueChange}
         onSlidingComplete={onSliderSlidingComplete}
-        minimumTrackTintColor={(props: { theme: { accent: any; }; }) => props.theme.accent}
-        maximumTrackTintColor={(props: { theme: { muted: any; }; }) => props.theme.muted}
-        thumbTintColor={(props: { theme: { primary: any; }; }) => props.theme.primary}
+        minimumTrackTintColor={theme.accent} 
+        maximumTrackTintColor={theme.muted} 
+        thumbTintColor={theme.primary} 
       />
     </Container>
   );
