@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { View, Image } from "react-native";
 import Slider from "@react-native-community/slider";
 import styled, { useTheme } from "styled-components/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
 import { Audio, AVPlaybackStatus } from "expo-av";
 import StyledButton from "./StyledButton";
 
@@ -186,19 +186,19 @@ const LofiPlayer = () => {
       />
       <Controls>
         <StyledButton onPress={playPrevious}>
-          <MaterialIcons name="skip-previous" size={32} color={theme.base} />
+          <FontAwesome6 name="backward" size={32} color={theme.base} />
         </StyledButton>
 
         <StyledButton onPress={playPause}>
-          <MaterialIcons
-            name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
+          <FontAwesome6
+            name={isPlaying ? "pause-circle" : "play-circle"}
             size={64}
             color={theme.base}
           />
         </StyledButton>
 
         <StyledButton onPress={playNext}>
-          <MaterialIcons name="skip-next" size={32} color={theme.base} />
+          <FontAwesome6 name="forward" size={32} color={theme.base} />
         </StyledButton>
       </Controls>
     </Container>
