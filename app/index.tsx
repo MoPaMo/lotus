@@ -2,7 +2,7 @@
 import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styled from "styled-components/native";
-import SquareView from "@/components/MeditationsSquare";
+import AnimatedLinkView from "@/components/MeditationsSquare";
 
 const Container = styled.View`
   flex: 1;
@@ -28,13 +28,26 @@ const HomeScreen = () => {
       <FlatList
         style={{ width: "100%" }}
         data={[
-          { text: "First" },
-          { text: "Second" },
-          { text: "Third" },
-          { text: "Fourth" },
+          {
+            title: "Breathing",
+            href: "/relaxation/breathing",
+            symbol: "pulmonology",
+          },
+          { title: "LoFi", href: "/relaxation/lofi", symbol: "headphones" },
+          {
+            title: "White Noise",
+            href: "/relaxation/whitenoise",
+            symbol: "graphic_eq",
+          },
         ]}
         numColumns={2}
-        renderItem={({ item }) => <SquareView></SquareView>}
+        renderItem={({ item }) => (
+          <AnimatedLinkView
+            title={item.title}
+            href={item.href}
+            symbol={item.symbol}
+          ></AnimatedLinkView>
+        )}
         keyExtractor={(item, index) => index.toString()}
       />
     </Container>

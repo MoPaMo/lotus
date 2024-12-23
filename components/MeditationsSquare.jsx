@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Text } from "react-native";
+import {
+  Text,
+  TouchableWithoutFeedback,
+  Animated,
+  Linking,
+} from "react-native";
 
-const SquareContainer = styled.View`
+const AnimatedSquareContainer = styled(Animated.View)`
   flex: 1;
   aspect-ratio: 1;
   justify-content: center;
@@ -22,25 +27,49 @@ const BottomText = styled(Text)`
   bottom: 16px;
 `;
 
-const SquareWithSymbol = () => {
+const AnimatedLinkButton = ({ title, href, symbol }) => {
   const [iconSize, setIconSize] = useState(0);
   const theme = useTheme();
+  const scaleAnim = useRef(new Animated.Value(1)).current;
 
   const handleLayout = (e) => {
     const { width, height } = e.nativeEvent.layout;
     setIconSize(Math.min(width, height) * 0.69);
   };
 
+  const handlePressIn = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 0.95,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const handlePressOut = () => {
+    Animated.spring(scaleAnim, {
+      toValue: 1,
+      friction: 3,
+      useNativeDriver: true,
+    }).start();
+    // Open the href link
+    Linking.openURL(href).catch((err) =>
+      console.error("Failed to open URL:", err)
+    );
+  };
+
   return (
-    <SquareContainer onLayout={handleLayout}>
-      <MaterialIcons
-        name="self-improvement"
-        size={iconSize}
-        color={theme.base}
-      />
-      <BottomText>Meditation</BottomText>
-    </SquareContainer>
+    <TouchableWithoutFeedback
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+    >
+      <AnimatedSquareContainer
+        onLayout={handleLayout}
+        style={{ transform: [{ scale: scaleAnim }] }}
+      >
+        <MaterialIcons name={symbol} size={iconSize} color={theme.base} />
+        <BottomText>{title}</BottomText>
+      </AnimatedSquareContainer>
+    </TouchableWithoutFeedback>
   );
 };
 
-export default SquareWithSymbol;
+export default AnimatedLinkButton;
