@@ -30,8 +30,8 @@ const ProgressBar = styled(Slider)`
 `;
 
 const CoverImage = styled.Image`
-  width: 200px;
-  height: 200px;
+  width: 75vw;
+  height: 75vw;
   border-radius: 20px;
 `;
 
@@ -174,6 +174,16 @@ const LofiPlayer = () => {
   return (
     <Container>
       <CoverImage source={playlist[currentTrack].image} />
+      <ProgressBar
+        minimumValue={0}
+        maximumValue={duration}
+        value={position}
+        onValueChange={onSliderValueChange}
+        onSlidingComplete={onSliderSlidingComplete}
+        minimumTrackTintColor={theme.accent}
+        maximumTrackTintColor={theme.muted}
+        thumbTintColor={theme.sky}
+      />
       <Controls>
         <StyledButton onPress={playPrevious}>
           <MaterialIcons name="skip-previous" size={32} color={theme.base} />
@@ -191,17 +201,6 @@ const LofiPlayer = () => {
           <MaterialIcons name="skip-next" size={32} color={theme.base} />
         </StyledButton>
       </Controls>
-
-      <ProgressBar
-        minimumValue={0}
-        maximumValue={duration}
-        value={position}
-        onValueChange={onSliderValueChange}
-        onSlidingComplete={onSliderSlidingComplete}
-        minimumTrackTintColor={theme.accent}
-        maximumTrackTintColor={theme.muted}
-        thumbTintColor={theme.sky}
-      />
     </Container>
   );
 };
