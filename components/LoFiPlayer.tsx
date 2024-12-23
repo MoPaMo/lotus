@@ -9,10 +9,12 @@ import StyledButton from "./StyledButton";
 
 const Container = styled.View`
   flex: 1;
-  background-color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.base};
   justify-content: center;
   align-items: center;
   padding: 20px;
+  height: 100%;
+  width: 100%;
 `;
 
 const Controls = styled.View`
@@ -142,24 +144,24 @@ const LofiPlayer = () => {
         <MaterialIcons
           name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
           size={64}
-          color="#fff"
+          color={theme.base}
         />
       </StyledButton>
       <Controls>
         <StyledButton onPress={playPrevious}>
-          <MaterialIcons name="skip-previous" size={32} color="#fff" />
+          <MaterialIcons name="skip-previous" size={32} color={theme.base} />
         </StyledButton>
 
         <StyledButton onPress={playPause}>
           <MaterialIcons
             name={isPlaying ? "pause" : "play-arrow"}
             size={32}
-            color="#fff"
+            color={theme.base}
           />
         </StyledButton>
 
         <StyledButton onPress={playNext}>
-          <MaterialIcons name="skip-next" size={32} color="#fff" />
+          <MaterialIcons name="skip-next" size={32} color={theme.base} />
         </StyledButton>
       </Controls>
 
@@ -171,7 +173,7 @@ const LofiPlayer = () => {
         onSlidingComplete={onSliderSlidingComplete}
         minimumTrackTintColor={theme.accent}
         maximumTrackTintColor={theme.muted}
-        thumbTintColor={theme.primary}
+        thumbTintColor={theme.sky}
       />
     </Container>
   );
