@@ -3,7 +3,7 @@ import React from "react";
 import { View, Text, FlatList } from "react-native";
 import styled from "styled-components/native";
 import AnimatedLinkView from "@/components/MeditationsSquare";
-
+import { FontAwesome6 } from "@expo/vector-icons";
 const Container = styled.View`
   flex: 1;
   justify-content: center;
@@ -21,10 +21,19 @@ const Grid = styled.View`
   flex-wrap: wrap;
   justify-content: space-evenly;
 `;
+const Head = styled.Text`
+  font-size: 24px;
+  font-family: "Poppins_900Black";
+  color: ${(props) => props.theme.text};
+  margin-bottom: 20px;
+`;
 
 const HomeScreen = () => {
   return (
     <Container>
+    <Head>
+       <FontAwesome6 name="spa" size={24} />{" "}Lotus
+    </Head>
       <FlatList
         style={{ width: "100%" }}
         data={[
@@ -34,9 +43,12 @@ const HomeScreen = () => {
             symbol: "lungs",
             color: "pink",
           },
-          { title: "LoFi", href: "/relaxation/lofi", symbol: "headphones",
-            color: "blue" 
-           },
+          {
+            title: "LoFi",
+            href: "/relaxation/lofi",
+            symbol: "headphones",
+            color: "blue",
+          },
           {
             title: "White Noise",
             href: "/relaxation/whitenoise",
@@ -55,13 +67,12 @@ const HomeScreen = () => {
             symbol: "list-ol",
             color: "red",
           },
-            {
-                title: "Meditation",
-                href: "/relaxation/meditation",
-                symbol: "om",
-                color: "yellow",
-            },
-            
+          {
+            title: "Meditation",
+            href: "/relaxation/meditation",
+            symbol: "om",
+            color: "yellow",
+          },
         ]}
         numColumns={2}
         renderItem={({ item }) => (
