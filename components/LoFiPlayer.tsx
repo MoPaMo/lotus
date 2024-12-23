@@ -1,6 +1,6 @@
 // LofiPlayer.js
 import React, { useState, useEffect, useRef } from "react";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import Slider from "@react-native-community/slider";
 import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -29,6 +29,12 @@ const ProgressBar = styled(Slider)`
   margin-top: 20px;
 `;
 
+const CoverImage = styled.Image`
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+`;
+
 const LofiPlayer = () => {
   const theme = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -38,15 +44,42 @@ const LofiPlayer = () => {
   const [currentTrack, setCurrentTrack] = useState(0);
   const isSeeking = useRef(false);
   const playlist = [
-    require("@/assets/lofi/1.mp3"),
-    require("@/assets/lofi/2.mp3"),
-    require("@/assets/lofi/3.mp3"),
-    require("@/assets/lofi/4.mp3"),
-    require("@/assets/lofi/5.mp3"),
-    require("@/assets/lofi/6.mp3"),
-    require("@/assets/lofi/7.mp3"),
-    require("@/assets/lofi/8.mp3"),
-    require("@/assets/lofi/9.mp3"),
+    {
+      audio: require("@/assets/lofi/1.mp3"),
+      image: require("@/assets/lofi-img/1.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/2.mp3"),
+      image: require("@/assets/lofi-img/2.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/3.mp3"),
+      image: require("@/assets/lofi-img/3.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/4.mp3"),
+      image: require("@/assets/lofi-img/4.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/5.mp3"),
+      image: require("@/assets/lofi-img/5.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/6.mp3"),
+      image: require("@/assets/lofi-img/6.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/7.mp3"),
+      image: require("@/assets/lofi-img/7.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/8.mp3"),
+      image: require("@/assets/lofi-img/8.jpg"),
+    },
+    {
+      audio: require("@/assets/lofi/9.mp3"),
+      image: require("@/assets/lofi-img/9.jpg"),
+    },
   ];
 
   useEffect(() => {
@@ -64,7 +97,7 @@ const LofiPlayer = () => {
         await sound.unloadAsync();
       }
       const { sound: newSound, status } = await Audio.Sound.createAsync(
-        playlist[trackIndex],
+        playlist[trackIndex].audio,
         { shouldPlay: false },
         onPlaybackStatusUpdate
       );
@@ -140,6 +173,7 @@ const LofiPlayer = () => {
 
   return (
     <Container>
+      <CoverImage source={playlist[currentTrack].image} />
       <Controls>
         <StyledButton onPress={playPrevious}>
           <MaterialIcons name="skip-previous" size={32} color={theme.base} />
