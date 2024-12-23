@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled, { useTheme } from "styled-components/native";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
 import {
   Text,
   TouchableWithoutFeedback,
@@ -34,7 +34,7 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
 
   const handleLayout = (e) => {
     const { width, height } = e.nativeEvent.layout;
-    setIconSize(Math.min(width, height) * 0.69);
+    setIconSize(Math.min(width, height) * 0.5);
   };
 
   const handlePressIn = () => {
@@ -50,7 +50,6 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
       friction: 3,
       useNativeDriver: true,
     }).start();
-    // Open the href link
     Linking.openURL(href).catch((err) =>
       console.error("Failed to open URL:", err)
     );
@@ -65,7 +64,7 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
         onLayout={handleLayout}
         style={{ transform: [{ scale: scaleAnim }] }}
       >
-        <MaterialIcons name={symbol} size={iconSize} color={theme.base} />
+        <FontAwesome6 name={symbol} size={iconSize} color={theme.base} />
         <BottomText>{title}</BottomText>
       </AnimatedSquareContainer>
     </TouchableWithoutFeedback>

@@ -39,6 +39,11 @@ const HomeScreen = () => {
             href: "/relaxation/whitenoise",
             symbol: "graphic_eq",
           },
+          {
+            title: "Sport",
+            href: "/sport",
+            symbol: "broom-ball",
+          },
         ]}
         numColumns={2}
         renderItem={({ item }) => (
