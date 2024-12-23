@@ -1,12 +1,9 @@
+// components/AnimatedLinkButton.jsx
 import React, { useState, useRef } from "react";
 import styled, { useTheme } from "styled-components/native";
 import { FontAwesome6 } from "@expo/vector-icons";
-import {
-  Text,
-  TouchableWithoutFeedback,
-  Animated,
-  Linking,
-} from "react-native";
+import { Text, TouchableWithoutFeedback, Animated } from "react-native";
+import { useRouter } from "expo-router"; // Import useRouter from expo-router
 
 const AnimatedSquareContainer = styled(Animated.View)`
   flex: 1;
@@ -31,6 +28,7 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
   const [iconSize, setIconSize] = useState(0);
   const theme = useTheme();
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const router = useRouter(); // Initialize the router
 
   const handleLayout = (e) => {
     const { width, height } = e.nativeEvent.layout;
@@ -50,9 +48,7 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
       friction: 3,
       useNativeDriver: true,
     }).start();
-    Linking.openURL(href).catch((err) =>
-      console.error("Failed to open URL:", err)
-    );
+    router.push(href); // Use router.push for navigation
   };
 
   return (
@@ -72,3 +68,4 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
 };
 
 export default AnimatedLinkButton;
+ 

@@ -31,7 +31,7 @@ const HomeScreen = () => {
           {
             title: "Breathing",
             href: "/relaxation/breathing",
-            symbol: "pulmonology",
+            symbol: "lungs",
           },
           { title: "LoFi", href: "/relaxation/lofi", symbol: "headphones" },
           {
