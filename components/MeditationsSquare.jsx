@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import styled, { useTheme } from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Text } from "react-native";
-import AppLoading from "expo-app-loading";
-import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 const SquareContainer = styled.View`
   flex: 1;
@@ -27,14 +25,6 @@ const BottomText = styled(Text)`
 const SquareWithSymbol = () => {
   const [iconSize, setIconSize] = useState(0);
   const theme = useTheme();
-
-  let [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
 
   const handleLayout = (e) => {
     const { width, height } = e.nativeEvent.layout;
