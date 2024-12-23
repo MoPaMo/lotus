@@ -180,8 +180,8 @@ const LofiPlayer = () => {
         value={position}
         onValueChange={onSliderValueChange}
         onSlidingComplete={onSliderSlidingComplete}
-        minimumTrackTintColor={theme.accent}
-        maximumTrackTintColor={theme.muted}
+        minimumTrackTintColor={theme.subtext0}
+        maximumTrackTintColor={theme.surface0}
         thumbTintColor={theme.sky}
       />
       <Controls>
