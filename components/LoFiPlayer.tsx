@@ -140,13 +140,6 @@ const LofiPlayer = () => {
 
   return (
     <Container>
-      <StyledButton onPress={playPause}>
-        <MaterialIcons
-          name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
-          size={64}
-          color={theme.base}
-        />
-      </StyledButton>
       <Controls>
         <StyledButton onPress={playPrevious}>
           <MaterialIcons name="skip-previous" size={32} color={theme.base} />
@@ -154,8 +147,8 @@ const LofiPlayer = () => {
 
         <StyledButton onPress={playPause}>
           <MaterialIcons
-            name={isPlaying ? "pause" : "play-arrow"}
-            size={32}
+            name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
+            size={64}
             color={theme.base}
           />
         </StyledButton>
