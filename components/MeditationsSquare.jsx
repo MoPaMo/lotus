@@ -10,7 +10,7 @@ const AnimatedSquareContainer = styled(Animated.View)`
   aspect-ratio: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.pink};
+  background-color: ${(props) => props.theme[props.customColor]};
   padding: 16px;
   border-radius: 16px;
   margin: 8px;
@@ -24,7 +24,7 @@ const BottomText = styled(Text)`
   bottom: 16px;
 `;
 
-const AnimatedLinkButton = ({ title, href, symbol }) => {
+const AnimatedLinkButton = ({ title, href, symbol, color="surface0" }) => {
   const [iconSize, setIconSize] = useState(0);
   const theme = useTheme();
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -59,6 +59,7 @@ const AnimatedLinkButton = ({ title, href, symbol }) => {
       <AnimatedSquareContainer
         onLayout={handleLayout}
         style={{ transform: [{ scale: scaleAnim }] }}
+        customColor={color}
       >
         <FontAwesome6 name={symbol} size={iconSize} color={theme.base} />
         <BottomText>{title}</BottomText>

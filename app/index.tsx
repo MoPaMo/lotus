@@ -32,18 +32,29 @@ const HomeScreen = () => {
             title: "Breathing",
             href: "/relaxation/breathing",
             symbol: "lungs",
+            color: "pink",
           },
-          { title: "LoFi", href: "/relaxation/lofi", symbol: "headphones" },
+          { title: "LoFi", href: "/relaxation/lofi", symbol: "headphones",
+            color: "blue" 
+           },
           {
             title: "White Noise",
             href: "/relaxation/whitenoise",
-            symbol: "graphic_eq",
+            symbol: "wave-square",
+            color: "flamingo",
           },
           {
             title: "Sport",
             href: "/sport",
             symbol: "broom-ball",
+            color: "green",
           },
+          {
+            title: "54321",
+            href: "/relaxation/54321",
+            symbol: "list-ol",
+            color: "red",
+          }
         ]}
         numColumns={2}
         renderItem={({ item }) => (
@@ -51,6 +62,7 @@ const HomeScreen = () => {
             title={item.title}
             href={item.href}
             symbol={item.symbol}
+            color={item.color}
           ></AnimatedLinkView>
         )}
         keyExtractor={(item, index) => index.toString()}
