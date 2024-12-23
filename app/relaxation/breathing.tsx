@@ -7,6 +7,9 @@ const Container = styled.View`
   justify-content: center;
   align-items: center;
   background-color: ${(props) => props.theme.base};
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
 
 
