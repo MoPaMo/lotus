@@ -34,9 +34,9 @@ const LofiPlayer: React.FC = () => {
   const [currentTrack, setCurrentTrack] = useState(0);
   const isSeeking = useRef(false);
   const playlist = [
-    require("./assets/lofi1.mp3"),
-    require("./assets/lofi2.mp3"),
-    require("./assets/lofi3.mp3"),
+    require("./assets/lofi/1.mp3"),
+    require("./assets/lofi/2.mp3"),
+    require("./assets/lofi/3.mp3"),
   ];
 
   useEffect(() => {
