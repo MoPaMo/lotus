@@ -34,15 +34,15 @@ const BreathingExercise: React.FC<BreathingExerciseProps> = ({ cycles }) => {
   const scale = useRef(new Animated.Value(1)).current;
   const opacity = useRef(new Animated.Value(0)).current;
 
-  const [step, setStep] = useState<"Breathe In" | "Hold" | "Breathe Out">(
-    "Breathe In"
+  const [step, setStep] = useState<"Einatmen" | "Halten" | "Ausatmen">(
+    "Einatmen"
   );
 
   useEffect(() => {
     let cycleCount = 0;
 
     const breatheIn = () => {
-      setStep("Breathe In");
+      setStep("Einatmen");
       Animated.parallel([
         Animated.timing(scale, {
           toValue: 1.5,
@@ -59,7 +59,7 @@ const BreathingExercise: React.FC<BreathingExerciseProps> = ({ cycles }) => {
     };
 
     const hold = () => {
-      setStep("Hold");
+      setStep("Halten");
       Animated.sequence([
         Animated.timing(scale, {
           toValue: 1.5,
@@ -71,7 +71,7 @@ const BreathingExercise: React.FC<BreathingExerciseProps> = ({ cycles }) => {
     };
 
     const breatheOut = () => {
-      setStep("Breathe Out");
+      setStep("Ausatmen");
       Animated.parallel([
         Animated.timing(scale, {
           toValue: 1,

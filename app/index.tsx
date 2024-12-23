@@ -38,7 +38,7 @@ const HomeScreen = () => {
         style={{ width: "100%" }}
         data={[
           {
-            title: "Breathing",
+            title: "Atmen",
             href: "/relaxation/breathing",
             symbol: "lungs",
             color: "pink",
