@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 import Slider from "@react-native-community/slider";
 import styled from "styled-components/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { Audio } from "expo-av";
+import { Audio, AVPlaybackStatus } from "expo-av";
 
 const Container = styled.View`
   flex: 1;
@@ -48,10 +48,12 @@ const LofiPlayer: React.FC = () => {
       onPlaybackStatusUpdate
     );
     setSound(newSound);
-    setDuration(status.durationMillis || 0);
+    if ('durationMillis' in status) {
+      setDuration(status.durationMillis || 0);
+    }
   };
 
-  const onPlaybackStatusUpdate = (status: Audio.AVPlaybackStatus) => {
+  const onPlaybackStatusUpdate = (status: AVPlaybackStatus) => {
     if (!isSeeking.current && status.isLoaded) {
       setPosition(status.positionMillis);
       setDuration(status.durationMillis || 0);
@@ -106,7 +108,7 @@ const LofiPlayer: React.FC = () => {
         <MaterialIcons
           name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
           size={64}
-          color={(props) => props.theme.primary}
+          color={(props: { theme: { primary: any; }; }) => props.theme.primary}
         />
       </TouchableOpacity>
       <Controls>
@@ -114,21 +116,21 @@ const LofiPlayer: React.FC = () => {
           <MaterialIcons
             name="skip-previous"
             size={32}
-            color={(props) => props.theme.primary}
+            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={playPause}>
           <MaterialIcons
             name={isPlaying ? "pause" : "play-arrow"}
             size={32}
-            color={(props) => props.theme.primary}
+            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={skipForward}>
           <MaterialIcons
             name="skip-next"
             size={32}
-            color={(props) => props.theme.primary}
+            color={(props: { theme: { primary: any; }; }) => props.theme.primary}
           />
         </TouchableOpacity>
       </Controls>
@@ -138,9 +140,9 @@ const LofiPlayer: React.FC = () => {
         value={position}
         onValueChange={onSliderValueChange}
         onSlidingComplete={onSliderSlidingComplete}
-        minimumTrackTintColor={(props) => props.theme.accent}
-        maximumTrackTintColor={(props) => props.theme.muted}
-        thumbTintColor={(props) => props.theme.primary}
+        minimumTrackTintColor={(props: { theme: { accent: any; }; }) => props.theme.accent}
+        maximumTrackTintColor={(props: { theme: { muted: any; }; }) => props.theme.muted}
+        thumbTintColor={(props: { theme: { primary: any; }; }) => props.theme.primary}
       />
     </Container>
   );
