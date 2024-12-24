@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { Audio } from "expo-av";
 import { FontAwesome6 } from "@expo/vector-icons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
+import Slider from "@react-native-community/slider";
 
 const Container = styled.View`
   flex: 1;
@@ -35,6 +36,27 @@ const WellDoneText = styled.Text`
   font-size: 28px;
   color: ${(props) => props.theme.text};
   margin-top: 20px;
+`;
+
+const DurationSetter = styled.View`
+  align-items: center;
+  margin-bottom: 20px;
+  color: ${(props) => props.theme.text};
+`;
+
+const Input = styled.Text`
+  font-size: 18px;
+  color: ${(props) => props.theme.text};
+`;
+
+const Yellow = styled.Text`
+  color: ${(props) => props.theme.yellow};
+`;
+
+const Label = styled.Text`
+  font-size: 18px;
+  color: ${(props) => props.theme.text};
+  margin-bottom: 10px;
 `;
 
 const Meditation = () => {
@@ -99,9 +121,18 @@ const Meditation = () => {
 
   return (
     <Container>
-      {!isPlaying && !isCompleted && (
-        <Text style={styles.input}>Set Time: {duration} seconds</Text>
-      )}
+      <DurationSetter>
+        <Label>Set Time (seconds):</Label>
+        <Slider
+          style={{ width: 200, height: 40 }}
+          minimumValue={30}
+          maximumValue={3600}
+          step={10}
+          value={duration}
+          onValueChange={setDuration}
+        />
+        <Input>{duration} seconds</Input>
+      </DurationSetter>
       <AnimatedCircularProgress
         size={200}
         width={10}
@@ -137,6 +168,11 @@ const styles = StyleSheet.create({
   },
   yellow: {
     color: "#df8e1d",
+  },
+  label: {
+    fontSize: 18,
+    color: "#fff",
+    marginBottom: 10,
   },
 });
 
