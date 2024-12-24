@@ -33,7 +33,7 @@ const Button = styled(TouchableOpacity)`
 `;
 
 const ButtonText = styled(Text)`
-  color: ${(props) => props.theme.text};
+  color: ${(props) => props.theme.base};
   font-family: Poppins_400Regular;
   font-size: 16px;
   margin-left: 10px;

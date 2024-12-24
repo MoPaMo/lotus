@@ -173,7 +173,7 @@ const Meditation = () => {
     <Container>
       {!isPlaying && !isPaused && (
         <DurationSetter>
-          <Label>Set Time (seconds):</Label>
+          <Label>Dauer einstellen:</Label>
           <Slider
             style={{ width: 200, height: 40 }}
             minimumValue={30}
