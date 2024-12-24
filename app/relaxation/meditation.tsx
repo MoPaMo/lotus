@@ -131,7 +131,11 @@ const Meditation = () => {
           value={duration}
           onValueChange={setDuration}
         />
-        <Input>{duration} seconds</Input>
+        <Input>
+          {duration >= 60
+            ? `${Math.floor(duration / 60)}m ${duration % 60}s`
+            : `${duration}s`}
+        </Input>
       </DurationSetter>
       <AnimatedCircularProgress
         size={200}
@@ -140,7 +144,13 @@ const Meditation = () => {
         tintColor={styles.yellow.color}
         backgroundColor="#3d5875"
       >
-        {() => <TimerText>{remaining}s</TimerText>}
+        {() => (
+          <TimerText>
+            {duration >= 60
+              ? `${Math.floor(duration / 60)}m`
+              : `${duration}s`}
+          </TimerText>
+        )}
       </AnimatedCircularProgress>
       <Controls>
         <Button onPress={toggleMute}>
