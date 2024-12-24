@@ -51,9 +51,9 @@ const HomeScreen = () => {
           },
           {
             title: "White Noise",
-            href: "/relaxation/whitenoise",
+            href: "/relaxation/noise",
             symbol: "wave-square",
-            color: "flamingo",
+            color: "mauve",
           },
           {
             title: "Sport",
