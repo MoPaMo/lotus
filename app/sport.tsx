@@ -64,6 +64,25 @@ const LinkText = styled.Text`
   elevation: 2;
 `;
 
+const TopText = styled.Text`
+  color: ${(props) => props.theme.green};
+  margin-top: 10px;
+  font-size: 16px;
+  font-family: "Poppins_400Regular";
+  background-color: rgba(0, 128, 0, 0.2);
+  padding-bottom: 16px;
+  padding: 8px;
+  border-radius: 12px;
+  shadow-color: #000;
+  shadow-offset: {
+    width: 0;
+    height: 1;
+  }
+  shadow-opacity: 0.2;
+  shadow-radius: 1.41px;
+  elevation: 2;
+`;
+
 const sports = [
   {
     name: "Bouldern",
@@ -78,11 +97,9 @@ const sports = [
     link: "https://www.berlinerbaeder.de/baeder/",
     icon: "person-swimming",
   },
-  { name: "Pilates", link: null ,
-    icon:"person-falling"
-  },
+  { name: "Pilates", link: null, icon: "person-falling" },
   { name: "HIIT", link: null, icon: "dumbbell" },
-  
+
   {
     name: "Tischtennis",
     link: "https://www.google.com/maps/search/tischtennis+platte",
@@ -116,42 +133,42 @@ const sports = [
   {
     name: "Rugby",
     link: "https://www.google.com/maps/search/rugby",
-    icon:"football"
+    icon: "football",
   },
   {
     name: "Skateboarding",
     link: "https://www.google.com/maps/search/skatepark",
-    icon:"city"
+    icon: "city",
   },
   {
     name: "Skiing",
     link: "https://www.google.com/maps/search/skigebiet",
-    icon:"person-skiing"
+    icon: "person-skiing",
   },
   {
     name: "Snowboarding",
     link: "https://www.google.com/maps/search/snowboarding+park",
-    icon:"person-snowboarding"
+    icon: "person-snowboarding",
   },
   {
     name: "Klettern",
     link: "https://www.google.com/maps/search/kletterhalle",
-    icon:"mountain"
+    icon: "mountain",
   },
   {
     name: "Badminton",
     link: "https://www.google.com/maps/search/badminton+halle",
-    icon:"badminton"
+    icon: "badminton",
   },
   {
     name: "Golf",
     link: "https://www.google.com/maps/search/golfplatz",
-    icon:"golf-ball-tee"
+    icon: "golf-ball-tee",
   },
   {
     name: "Boxen",
     link: "https://www.google.com/maps/search/boxhalle",
-    icon:"mitten"
+    icon: "mitten",
   },
   {
     name: "Karate",
@@ -168,35 +185,35 @@ const sports = [
   {
     name: "Schach",
     link: null,
-    icon:"chess"
+    icon: "chess",
   },
 
   {
     name: "Reiten",
     link: "https://www.google.com/maps/search/reitställe",
-    icon:"horse"
+    icon: "horse",
   },
   {
     name: "Triathlon",
     link: null,
-    icon:"person-swimming"
+    icon: "person-swimming",
   },
   {
     name: "Surfen",
     link: "https://www.google.com/maps/search/surfspots",
-    icon:"water"
+    icon: "water",
   },
-  
+
   {
     name: "Eishockey",
     link: "https://www.google.com/maps/search/eishockey+hallen",
-    icon:"hockey-puck"
+    icon: "hockey-puck",
   },
-  
+
   {
     name: "Parkour",
     link: null,
-    icon:"person-running"
+    icon: "person-running",
   },
 ];
 
@@ -238,6 +255,9 @@ const SportView = () => {
 
   return (
     <Container>
+        <TopText>
+            Finde eine Sportart
+        </TopText>
       <TouchableOpacity onPress={getRandomSport}>
         <AnimatedBall
           style={{
@@ -249,7 +269,11 @@ const SportView = () => {
       </TouchableOpacity>
       {suggestion && (
         <>
-          <SuggestionText> <FontAwesome6 icon={suggestion.icon} size="18" color="#fff"/>{suggestion.name}</SuggestionText>
+          <SuggestionText>
+            {" "}
+            <FontAwesome6 icon={suggestion.icon} size="18" color="#fff" />
+            {suggestion.name}
+          </SuggestionText>
           {suggestion.link && (
             <LinkText onPress={() => openLink(suggestion.link)}>
               <FontAwesome6 name="magnifying-glass-location" /> In der Nähe
