@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Linking, TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
-import { keyframes } from "styled-components";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 const Container = styled.View`
@@ -11,14 +10,7 @@ const Container = styled.View`
   background-color: ${(props) => props.theme.base};
 `;
 
-const bounce = keyframes`
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-`;
+
 
 const Ball = styled.TouchableOpacity`
   width: 200px;
@@ -52,7 +44,6 @@ const EightBall = styled.View`
   shadow-opacity: 0.3;
   shadow-radius: 4.65px;
   elevation: 8;
-  animation: ${bounce} 2s infinite;
   border: 2px solid #ffffff;
   transition: all 0.3s ease;
 `;
