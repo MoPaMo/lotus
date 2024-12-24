@@ -5,9 +5,10 @@ import { Audio } from "expo-av";
 import { MaterialIcons } from "@expo/vector-icons";
 
 const noiseTypes: Record<string, any> = {
-  white: require("./assets/white_noise.mp3"),
+  /*white: require("./assets/white_noise.mp3"),
   brown: require("./assets/brown_noise.mp3"),
-  dark: require("./assets/dark_noise.mp3"),
+  dark: require("./assets/dark_noise.mp3"),*/
+  pink: require("@/assets/noise/pink_noise.mp3"),
 };
 
 // Styled components using theme colors
@@ -15,8 +16,10 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.rosewater};
+  background-color: ${(props) => props.theme.base};
   padding: 20px;
+    height: 100%;
+    width: 100%;
 `;
 
 const Button = styled(TouchableOpacity)`
