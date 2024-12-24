@@ -4,21 +4,21 @@ import styled from "styled-components/native";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 const steps = [
-  { count: 5, icon: "eye", label: "See 5 things" },
-  { count: 5, icon: "ear-listen", label: "Hear 5 things" },
-  { count: 5, icon: "wind", label: "Smell 5 things" },
-  { count: 4, icon: "eye", label: "See 4 things" },
-  { count: 4, icon: "ear-listen", label: "Hear 4 things" },
-  { count: 4, icon: "wind", label: "Smell 4 things" },
-  { count: 3, icon: "eye", label: "See 3 things" },
-  { count: 3, icon: "ear-listen", label: "Hear 3 things" },
-  { count: 3, icon: "wind", label: "Smell 3 things" },
-  { count: 2, icon: "eye", label: "See 2 things" },
-  { count: 2, icon: "ear-listen", label: "Hear 2 things" },
-  { count: 2, icon: "wind", label: "Smell 2 things" },
-  { count: 1, icon: "eye", label: "See 1 thing" },
-  { count: 1, icon: "ear-listen", label: "Hear 1 thing" },
-  { count: 1, icon: "wind", label: "Smell 1 thing" },
+  { count: 5, icon: "eye", label: "5 Dinge sehen" },
+  { count: 5, icon: "ear-listen", label: "5 Dinge hören" },
+  { count: 5, icon: "wind", label: "5 Dinge riechen" },
+  { count: 4, icon: "eye", label: "4 Dinge sehen" },
+  { count: 4, icon: "ear-listen", label: "4 Dinge hören" },
+  { count: 4, icon: "wind", label: "4 Dinge riechen" },
+  { count: 3, icon: "eye", label: "3 Dinge sehen" },
+  { count: 3, icon: "ear-listen", label: "3 Dinge hören" },
+  { count: 3, icon: "wind", label: "3 Dinge riechen" },
+  { count: 2, icon: "eye", label: "2 Dinge sehen" },
+  { count: 2, icon: "ear-listen", label: "2 Dinge hören" },
+  { count: 2, icon: "wind", label: "2 Dinge riechen" },
+  { count: 1, icon: "eye", label: "1 Sache sehen" },
+  { count: 1, icon: "ear-listen", label: "1 Sache hören" },
+  { count: 1, icon: "wind", label: "1 Sache riechen" },
 ];
 
 const Container = styled.View`
@@ -94,7 +94,7 @@ const FiveFiveFourFourThreeThreeTwoTwoOneOneOne = () => {
         <StepLabel>{steps[currentStep].label}</StepLabel>
       </AnimatedStep>
       <ContinueButton onPress={nextStep}>
-        <ButtonText>Continue</ButtonText>
+        <ButtonText>Weiter</ButtonText>
       </ContinueButton>
     </Container>
   );
