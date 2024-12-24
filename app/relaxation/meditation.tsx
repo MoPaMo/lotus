@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import styled from "styled-components/native";
 import { Audio } from "expo-av";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome6 } from "@expo/vector-icons";
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 
 const Container = styled.View`
@@ -113,15 +113,15 @@ const Meditation = () => {
       </AnimatedCircularProgress>
       <Controls>
         <Button onPress={toggleMute}>
-          <MaterialIcons
-            name={isMuted ? "volume-mute" : "volume-up"}
+          <FontAwesome6
+            name={isMuted ? "volume-xmark" : "volume-high"}
             size={24}
             color="#fff"
           />
         </Button>
         {!isPlaying && !isCompleted && (
           <Button onPress={startMeditation}>
-            <MaterialIcons name="play-arrow" size={24} color="#fff" />
+            <FontAwesome6 name="play" size={24} color="#fff" />
           </Button>
         )}
       </Controls>
