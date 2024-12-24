@@ -113,6 +113,25 @@ const Meditation = () => {
     }, 1000);
   };
 
+  const stopMeditation = async () => {
+    if (meditationSound.current) {
+      await meditationSound.current.stopAsync();
+    }
+    if (gongSound.current) {
+      await gongSound.current.stopAsync();
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    setIsPlaying(false);
+    setRemaining(duration);
+  };
+
+  const restartMeditation = async () => {
+    stopMeditation();
+    startMeditation();
+  };
+
   const toggleMute = async () => {
     const newMute = !isMuted;
     setIsMuted(newMute);
@@ -121,22 +140,24 @@ const Meditation = () => {
 
   return (
     <Container>
-      <DurationSetter>
-        <Label>Set Time (seconds):</Label>
-        <Slider
-          style={{ width: 200, height: 40 }}
-          minimumValue={30}
-          maximumValue={3600}
-          step={10}
-          value={duration}
-          onValueChange={setDuration}
-        />
-        <Input>
-          {duration >= 60
-            ? `${Math.floor(duration / 60)}m ${duration % 60}s`
-            : `${duration}s`}
-        </Input>
-      </DurationSetter>
+      {!isPlaying && (
+        <DurationSetter>
+          <Label>Set Time (seconds):</Label>
+          <Slider
+            style={{ width: 200, height: 40 }}
+            minimumValue={30}
+            maximumValue={3600}
+            step={10}
+            value={duration}
+            onValueChange={setDuration}
+          />
+          <Input>
+            {duration >= 60
+              ? `${Math.floor(duration / 60)}m ${duration % 60}s`
+              : `${duration}s`}
+          </Input>
+        </DurationSetter>
+      )}
       <AnimatedCircularProgress
         size={200}
         width={10}
@@ -146,9 +167,7 @@ const Meditation = () => {
       >
         {() => (
           <TimerText>
-            {duration >= 60
-              ? `${Math.floor(duration / 60)}m`
-              : `${duration}s`}
+            {duration >= 60 ? `${Math.floor(duration / 60)}m` : `${duration}s`}
           </TimerText>
         )}
       </AnimatedCircularProgress>
@@ -164,6 +183,16 @@ const Meditation = () => {
           <Button onPress={startMeditation}>
             <FontAwesome6 name="play" size={24} color="#fff" />
           </Button>
+        )}
+        {isPlaying && (
+          <>
+            <Button onPress={stopMeditation}>
+              <FontAwesome6 name="stop" size={24} color="#fff" />
+            </Button>
+            <Button onPress={restartMeditation}>
+              <FontAwesome6 name="redo" size={24} color="#fff" />
+            </Button>
+          </>
         )}
       </Controls>
       {isCompleted && <WellDoneText>Well done</WellDoneText>}
