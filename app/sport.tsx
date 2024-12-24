@@ -72,9 +72,106 @@ const sports = [
   { name: "Yoga", link: null },
   { name: "Laufen", link: null },
   { name: "Radfahren", link: null },
-  { name: "Schwimmen", link: null },
+  { name: "Schwimmen", link: "https://www.berlinerbaeder.de/baeder/" },
   { name: "Pilates", link: null },
   { name: "HIIT", link: null },
+  {
+    name: "Tennis",
+    link: "https://www.google.com/maps/search/tennis+platz",
+  },
+  {
+    name: "Basketball",
+    link: "https://www.google.com/maps/search/basketball+platz",
+  },
+  {
+    name: "Fußball",
+    link: "https://www.google.com/maps/search/fußball+platz",
+  },
+  {
+    name: "Volleyball",
+    link: "https://www.google.com/maps/search/volleyball+sporthalle",
+  },
+  {
+    name: "Handball",
+    link: "https://www.google.com/maps/search/handball",
+  },
+  {
+    name: "Rugby",
+    link: "https://www.google.com/maps/search/rugby",
+  },
+  {
+    name: "Skateboarding",
+    link: "https://www.google.com/maps/search/skatepark",
+  },
+  {
+    name: "Skiing",
+    link: "https://www.google.com/maps/search/skigebiet",
+  },
+  {
+    name: "Snowboarding",
+    link: "https://www.google.com/maps/search/snowboarding+park",
+  },
+  {
+    name: "Klettern",
+    link: "https://www.google.com/maps/search/kletterhalle",
+  },
+  {
+    name: "Badminton",
+    link: "https://www.google.com/maps/search/badminton+halle",
+  },
+  {
+    name: "Golf",
+    link: "https://www.google.com/maps/search/golfplatz",
+  },
+  {
+    name: "Boxen",
+    link: "https://www.google.com/maps/search/boxhalle",
+  },
+  {
+    name: "Karate",
+    link: "https://www.google.com/maps/search/karate+vereine",
+  },
+  {
+    name: "Taekwondo",
+    link: "https://www.google.com/maps/search/taekwondo+vereine",
+  },
+  {
+    name: "Judo",
+    link: "https://www.google.com/maps/search/judo+vereine",
+  },
+  {
+    name: "Schach",
+    link: null,
+  },
+
+  {
+    name: "Reiten",
+    link: "https://www.google.com/maps/search/reitställe",
+  },
+  {
+    name: "Triathlon",
+    link: null,
+  },
+  {
+    name: "Surfen",
+    link: "https://www.google.com/maps/search/surfspots",
+  },
+  {
+    name: "Lacrosse",
+    link: "https://www.google.com/maps/search/lacrosse+felder",
+  },
+  {
+    name: "Eishockey",
+    link: "https://www.google.com/maps/search/eishockey+hallen",
+  },
+  {
+    name: "Skaten",
+    link: "https://www.google.com/maps/search/skateparks",
+  },
+  {
+    name: "Parkour",
+    link: null,
+  },
 ];
 
 const SportView = () => {
@@ -128,7 +225,8 @@ const SportView = () => {
           <SuggestionText>{suggestion.name}</SuggestionText>
           {suggestion.link && (
             <LinkText onPress={() => openLink(suggestion.link)}>
-              <FontAwesome6 name="magnifying-glass-location" /> In Google Maps suchen
+              <FontAwesome6 name="magnifying-glass-location" /> In der Nähe
+              finden
             </LinkText>
           )}
         </>
