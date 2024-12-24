@@ -18,8 +18,8 @@ const Container = styled.View`
   align-items: center;
   background-color: ${(props) => props.theme.base};
   padding: 20px;
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 `;
 
 const Button = styled(TouchableOpacity)`
@@ -51,6 +51,15 @@ const NoisePlayer: React.FC = () => {
       }
     };
   }, [sound]);
+
+  useEffect(() => {
+    return () => {
+      // Stop playing noise on exit
+      if (sound) {
+        sound.stopAsync();
+      }
+    };
+  }, []);
 
   const playSound = async (noise: string) => {
     if (sound) {
