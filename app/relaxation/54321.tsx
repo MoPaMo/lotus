@@ -1,24 +1,69 @@
 import React, { useState } from "react";
-import { View, Text, Button, StyleSheet, Animated } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { View, Text, Button, Animated } from "react-native";
+import styled from "styled-components/native";
+import { FontAwesome6 } from "@expo/vector-icons";
 
 const steps = [
   { count: 5, icon: "eye", label: "See 5 things" },
-  { count: 5, icon: "ear", label: "Hear 5 things" },
-  { count: 5, icon: "flower", label: "Smell 5 things" },
+  { count: 5, icon: "ear-listen", label: "Hear 5 things" },
+  { count: 5, icon: "wind", label: "Smell 5 things" },
   { count: 4, icon: "eye", label: "See 4 things" },
-  { count: 4, icon: "ear", label: "Hear 4 things" },
-  { count: 4, icon: "flower", label: "Smell 4 things" },
+  { count: 4, icon: "ear-listen", label: "Hear 4 things" },
+  { count: 4, icon: "wind", label: "Smell 4 things" },
   { count: 3, icon: "eye", label: "See 3 things" },
-  { count: 3, icon: "ear", label: "Hear 3 things" },
-  { count: 3, icon: "flower", label: "Smell 3 things" },
+  { count: 3, icon: "ear-listen", label: "Hear 3 things" },
+  { count: 3, icon: "wind", label: "Smell 3 things" },
   { count: 2, icon: "eye", label: "See 2 things" },
-  { count: 2, icon: "ear", label: "Hear 2 things" },
-  { count: 2, icon: "flower", label: "Smell 2 things" },
+  { count: 2, icon: "ear-listen", label: "Hear 2 things" },
+  { count: 2, icon: "wind", label: "Smell 2 things" },
   { count: 1, icon: "eye", label: "See 1 thing" },
-  { count: 1, icon: "ear", label: "Hear 1 thing" },
-  { count: 1, icon: "flower", label: "Smell 1 thing" },
+  { count: 1, icon: "ear-listen", label: "Hear 1 thing" },
+  { count: 1, icon: "wind", label: "Smell 1 thing" },
 ];
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.base};
+  padding: 20px;
+`;
+
+const AnimatedStep = styled(Animated.View)`
+  align-items: center;
+  margin-bottom: 30px;
+`;
+
+const Icon = styled(FontAwesome6)`
+  color: ${(props) => props.theme.red};
+  margin-bottom: 10px;
+`;
+
+const StepLabel = styled.Text`
+  font-size: 20px;
+  color: ${(props) => props.theme.text};
+  font-family: "Poppins_600SemiBold";
+`;
+
+const ContinueButton = styled.TouchableOpacity`
+  background-color: ${(props) => props.theme.red};
+  padding: 15px 30px;
+  border-radius: 25px;
+  shadow-color: #000;
+  shadow-offset: {
+    width: 0;
+    height: 4;
+  }
+  shadow-opacity: 0.3;
+  shadow-radius: 4.65px;
+  elevation: 8;
+`;
+
+const ButtonText = styled.Text`
+  color: #fff;
+  font-size: 18px;
+  font-family: "Poppins_600SemiBold";
+`;
 
 const FiveFiveFourFourThreeThreeTwoTwoOneOneOne = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -43,28 +88,16 @@ const FiveFiveFourFourThreeThreeTwoTwoOneOneOne = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.View style={{ transform: [{ translateX: slideAnim }] }}>
-        <FontAwesome name={steps[currentStep].icon} size={50} color="red" />
-        <Text style={styles.text}>{steps[currentStep].label}</Text>
-      </Animated.View>
-      <Button title="Continue" onPress={nextStep} color="red" />
-    </View>
+    <Container>
+      <AnimatedStep style={{ transform: [{ translateX: slideAnim }] }}>
+        <Icon name={steps[currentStep].icon} size={50} />
+        <StepLabel>{steps[currentStep].label}</StepLabel>
+      </AnimatedStep>
+      <ContinueButton onPress={nextStep}>
+        <ButtonText>Continue</ButtonText>
+      </ContinueButton>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    fontSize: 24,
-    marginVertical: 20,
-    color: "red",
-  },
-});
 
 export default FiveFiveFourFourThreeThreeTwoTwoOneOneOne;
