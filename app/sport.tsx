@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Linking, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Linking, TouchableOpacity, Animated, Easing } from "react-native";
 import styled from "styled-components/native";
 import { FontAwesome6 } from "@expo/vector-icons";
 
@@ -10,9 +10,7 @@ const Container = styled.View`
   background-color: ${(props) => props.theme.base};
 `;
 
-
-
-const Ball = styled.TouchableOpacity`
+const AnimatedBall = styled(Animated.View)`
   width: 200px;
   height: 200px;
   border-radius: 100px;
@@ -27,25 +25,6 @@ const Ball = styled.TouchableOpacity`
   shadow-opacity: 0.3;
   shadow-radius: 4.65px;
   elevation: 8;
-`;
-
-const EightBall = styled.View`
-  height: 200px;
-  width: 200px;
-  border-radius: 100px;
-  background-color: ${(props) => props.theme.green};
-  justify-content: center;
-  align-items: center;
-  shadow-color: #008000;
-  shadow-offset: {
-    width: 0;
-    height: 4;
-  }
-  shadow-opacity: 0.3;
-  shadow-radius: 4.65px;
-  elevation: 8;
-  border: 2px solid #ffffff;
-  transition: all 0.3s ease;
 `;
 
 const SuggestionText = styled.Text`
@@ -108,9 +87,26 @@ const SportView = () => {
     link: string | null;
   } | null>(null);
 
+  const animatedValue = useState(new Animated.Value(1))[0];
+
   const getRandomSport = () => {
     const randomSport = sports[Math.floor(Math.random() * sports.length)];
     setSuggestion(randomSport);
+
+    Animated.sequence([
+      Animated.timing(animatedValue, {
+        toValue: 1.1,
+        duration: 150,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 150,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+    ]).start();
   };
 
   const openLink = async (url: string) => {
@@ -122,9 +118,15 @@ const SportView = () => {
 
   return (
     <Container>
-      <Ball onPress={getRandomSport}>
-        <FontAwesome6 name="dice" size={64} color="#fff" />
-      </Ball>
+      <TouchableOpacity onPress={getRandomSport}>
+        <AnimatedBall
+          style={{
+            transform: [{ scale: animatedValue }],
+          }}
+        >
+          <FontAwesome6 name="dice" size={64} color="#fff" />
+        </AnimatedBall>
+      </TouchableOpacity>
       {suggestion && (
         <>
           <SuggestionText>{suggestion.name}</SuggestionText>
