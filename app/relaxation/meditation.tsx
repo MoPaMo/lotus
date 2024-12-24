@@ -61,6 +61,7 @@ const Label = styled.Text`
 
 const Meditation = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPaused, setIsPaused] = useState(false); // Added state for pause
   const [isMuted, setIsMuted] = useState(false);
   const [duration, setDuration] = useState(60); // default 1 minute
   const [remaining, setRemaining] = useState(duration);
@@ -94,6 +95,7 @@ const Meditation = () => {
   const startMeditation = async () => {
     await loadSounds();
     setIsPlaying(true);
+    setIsPaused(false);
     setIsCompleted(false);
     setRemaining(duration);
     meditationSound.current?.playAsync();
@@ -127,6 +129,35 @@ const Meditation = () => {
     setRemaining(duration);
   };
 
+  const pauseMeditation = async () => {
+    if (meditationSound.current) {
+      await meditationSound.current.pauseAsync();
+    }
+    if (gongSound.current) {
+      await gongSound.current.pauseAsync();
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    setIsPaused(true);
+    setIsPlaying(false);
+  };
+
+  const cancelMeditation = async () => {
+    if (meditationSound.current) {
+      await meditationSound.current.stopAsync();
+    }
+    if (gongSound.current) {
+      await gongSound.current.stopAsync();
+    }
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    setIsPlaying(false);
+    setIsPaused(false);
+    setRemaining(duration);
+  };
+
   const restartMeditation = async () => {
     stopMeditation();
     startMeditation();
@@ -140,7 +171,7 @@ const Meditation = () => {
 
   return (
     <Container>
-      {!isPlaying && (
+      {!isPlaying && !isPaused && (
         <DurationSetter>
           <Label>Set Time (seconds):</Label>
           <Slider
@@ -179,20 +210,25 @@ const Meditation = () => {
             color="#fff"
           />
         </Button>
-        {!isPlaying && !isCompleted && (
+        {!isPlaying && !isPaused && !isCompleted && (
           <Button onPress={startMeditation}>
             <FontAwesome6 name="play" size={24} color="#fff" />
           </Button>
         )}
         {isPlaying && (
           <>
-            <Button onPress={stopMeditation}>
+            <Button onPress={pauseMeditation}> 
+              <FontAwesome6 name="pause" size={24} color="#fff" />
+            </Button>
+            <Button onPress={cancelMeditation}> 
               <FontAwesome6 name="stop" size={24} color="#fff" />
             </Button>
-            <Button onPress={restartMeditation}>
-              <FontAwesome6 name="redo" size={24} color="#fff" />
-            </Button>
           </>
+        )}
+        {isPaused && (
+          <Button onPress={startMeditation}>
+            <FontAwesome6 name="play" size={24} color="#fff" />
+          </Button>
         )}
       </Controls>
       {isCompleted && <WellDoneText>Well done</WellDoneText>}
