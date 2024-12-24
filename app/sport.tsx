@@ -66,17 +66,13 @@ const LinkText = styled.Text`
 
 const sports = [
   {
-    name: "Bouldering",
-    link: "https://www.google.com/maps/search/bouldering+gym",
+    name: "Bouldern",
+    link: "https://www.google.com/maps/search/boulder+halle",
   },
   { name: "Yoga", link: null },
-  { name: "Running", link: null },
-  { name: "Cycling", link: null },
-  { name: "Swimming", link: null },
-  {
-    name: "Rock Climbing",
-    link: "https://www.google.com/maps/search/rock+climbing+gym",
-  },
+  { name: "Laufen", link: null },
+  { name: "Radfahren", link: null },
+  { name: "Schwimmen", link: null },
   { name: "Pilates", link: null },
   { name: "HIIT", link: null },
 ];
@@ -132,8 +128,7 @@ const SportView = () => {
           <SuggestionText>{suggestion.name}</SuggestionText>
           {suggestion.link && (
             <LinkText onPress={() => openLink(suggestion.link)}>
-              <FontAwesome6 name="magnifying-glass-location" /> Find Nearby
-              Facilities
+              <FontAwesome6 name="magnifying-glass-location" /> In Google Maps suchen
             </LinkText>
           )}
         </>
