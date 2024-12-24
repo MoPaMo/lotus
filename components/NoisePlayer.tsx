@@ -75,27 +75,50 @@ const NoisePlayer: React.FC = () => {
     setIsPlaying(!isPlaying);
   };
 
+  const handleSelectNoise = async (noise: string) => {
+    if (sound) {
+      await sound.unloadAsync();
+    }
+    const { sound: newSound } = await Audio.Sound.createAsync(
+      noiseTypes[noise],
+      {
+        isLooping: true,
+      }
+    );
+    setSound(newSound);
+    setCurrentNoise(noise);
+    await newSound.playAsync();
+    setIsPlaying(true);
+  };
+
+  const togglePlayPause = async () => {
+    if (!sound) return;
+    if (isPlaying) {
+      await sound.pauseAsync();
+    } else {
+      await sound.playAsync();
+    }
+    setIsPlaying(!isPlaying);
+  };
+
   return (
     <Container>
-      <Button onPress={() => playSound("white")}>
-        <MaterialIcons name="waves" size={24} color="#fff" />
-        <ButtonText>White Noise</ButtonText>
-      </Button>
-      <Button onPress={() => playSound("brown")}>
-        <MaterialIcons name="grain" size={24} color="#fff" />
-        <ButtonText>Brown Noise</ButtonText>
-      </Button>
-      <Button onPress={() => playSound("dark")}>
-        <MaterialIcons name="space-dashboard" size={24} color="#fff" />
-        <ButtonText>Dark Noise</ButtonText>
-      </Button>
-      <TouchableOpacity onPress={togglePlayback} style={{ marginTop: 20 }}>
+      {Object.keys(noiseTypes).map((type) => (
+        <Button key={type} onPress={() => handleSelectNoise(type)}>
+          <MaterialIcons name="music-note" size={24} color="white" />
+          <ButtonText>
+            {type.charAt(0).toUpperCase() + type.slice(1)} Noise
+          </ButtonText>
+        </Button>
+      ))}
+      <Button onPress={togglePlayPause}>
         <MaterialIcons
-          name={isPlaying ? "pause-circle-filled" : "play-circle-filled"}
-          size={60}
-          color={isPlaying ? "#f38ba8" : "#89b4fa"}
+          name={isPlaying ? "pause" : "play-arrow"}
+          size={24}
+          color="white"
         />
-      </TouchableOpacity>
+        <ButtonText>{isPlaying ? "Pause" : "Play"}</ButtonText>
+      </Button>
     </Container>
   );
 };
