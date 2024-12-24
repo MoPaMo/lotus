@@ -30,7 +30,7 @@ const AnimatedBall = styled(Animated.View)`
 const SuggestionText = styled.Text`
   margin-top: 20px;
   font-size: 18px;
-  color: #ffffff;
+  color: ${(props) => props.theme.text};
   text-align: center;
   font-family: "Poppins_900Black";
   background-color: rgba(255, 255, 255, 0.2);
@@ -68,64 +68,90 @@ const sports = [
   {
     name: "Bouldern",
     link: "https://www.google.com/maps/search/boulder+halle",
+    icon: "mountain",
   },
-  { name: "Yoga", link: null },
-  { name: "Laufen", link: null },
-  { name: "Radfahren", link: null },
-  { name: "Schwimmen", link: "https://www.berlinerbaeder.de/baeder/" },
-  { name: "Pilates", link: null },
-  { name: "HIIT", link: null },
+  { name: "Yoga", link: null, icon: "spa" },
+  { name: "Laufen", link: null, icon: "person-running" },
+  { name: "Radfahren", link: null, icon: "person-biking" },
+  {
+    name: "Schwimmen",
+    link: "https://www.berlinerbaeder.de/baeder/",
+    icon: "person-swimming",
+  },
+  { name: "Pilates", link: null ,
+    icon:"person-falling"
+  },
+  { name: "HIIT", link: null, icon: "dumbbell" },
+  
+  {
+    name: "Tischtennis",
+    link: "https://www.google.com/maps/search/tischtennis+platte",
+    icon: "table-tennis-paddle-ball",
+  },
   {
     name: "Tennis",
     link: "https://www.google.com/maps/search/tennis+platz",
+    icon: "baseball",
   },
   {
     name: "Basketball",
     link: "https://www.google.com/maps/search/basketball+platz",
+    icon: "basketball",
   },
   {
     name: "Fußball",
     link: "https://www.google.com/maps/search/fußball+platz",
+    icon: "futbol",
   },
   {
     name: "Volleyball",
     link: "https://www.google.com/maps/search/volleyball+sporthalle",
+    icon: "volleyball",
   },
   {
     name: "Handball",
     link: "https://www.google.com/maps/search/handball",
+    icon: "volleyball",
   },
   {
     name: "Rugby",
     link: "https://www.google.com/maps/search/rugby",
+    icon:"football"
   },
   {
     name: "Skateboarding",
     link: "https://www.google.com/maps/search/skatepark",
+    icon:"city"
   },
   {
     name: "Skiing",
     link: "https://www.google.com/maps/search/skigebiet",
+    icon:"person-skiing"
   },
   {
     name: "Snowboarding",
     link: "https://www.google.com/maps/search/snowboarding+park",
+    icon:"person-snowboarding"
   },
   {
     name: "Klettern",
     link: "https://www.google.com/maps/search/kletterhalle",
+    icon:"mountain"
   },
   {
     name: "Badminton",
     link: "https://www.google.com/maps/search/badminton+halle",
+    icon:"badminton"
   },
   {
     name: "Golf",
     link: "https://www.google.com/maps/search/golfplatz",
+    icon:"golf-ball-tee"
   },
   {
     name: "Boxen",
     link: "https://www.google.com/maps/search/boxhalle",
+    icon:"mitten"
   },
   {
     name: "Karate",
@@ -142,35 +168,35 @@ const sports = [
   {
     name: "Schach",
     link: null,
+    icon:"chess"
   },
 
   {
     name: "Reiten",
     link: "https://www.google.com/maps/search/reitställe",
+    icon:"horse"
   },
   {
     name: "Triathlon",
     link: null,
+    icon:"person-swimming"
   },
   {
     name: "Surfen",
     link: "https://www.google.com/maps/search/surfspots",
+    icon:"water"
   },
-  {
-    name: "Lacrosse",
-    link: "https://www.google.com/maps/search/lacrosse+felder",
-  },
+  
   {
     name: "Eishockey",
     link: "https://www.google.com/maps/search/eishockey+hallen",
+    icon:"hockey-puck"
   },
-  {
-    name: "Skaten",
-    link: "https://www.google.com/maps/search/skateparks",
-  },
+  
   {
     name: "Parkour",
     link: null,
+    icon:"person-running"
   },
 ];
 
@@ -178,6 +204,7 @@ const SportView = () => {
   const [suggestion, setSuggestion] = useState<{
     name: string;
     link: string | null;
+    icon: string | null;
   } | null>(null);
 
   const animatedValue = useState(new Animated.Value(1))[0];
@@ -222,7 +249,7 @@ const SportView = () => {
       </TouchableOpacity>
       {suggestion && (
         <>
-          <SuggestionText>{suggestion.name}</SuggestionText>
+          <SuggestionText> <FontAwesome6 icon={suggestion.icon} size="18" color="#fff"/>{suggestion.name}</SuggestionText>
           {suggestion.link && (
             <LinkText onPress={() => openLink(suggestion.link)}>
               <FontAwesome6 name="magnifying-glass-location" /> In der Nähe
