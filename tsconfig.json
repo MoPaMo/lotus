@@ -5,6 +5,12 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "components/*": [
+        "./components/*"
+      ],
+      "pages/*": [
+        "./pages/*"
       ]
     }
   },
@@ -12,6 +18,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-, "components/MeditationsSquare.jsx"  ]
+    "expo-env.d.ts",
+    "components/MeditationsSquare.jsx"
+  ]
 }

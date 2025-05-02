@@ -1,86 +1,70 @@
-import React, { useState, useEffect } from "react";
-import { Linking, TouchableOpacity, Animated, Easing } from "react-native";
-import styled from "styled-components/native";
-import { FontAwesome6 } from "@expo/vector-icons";
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100vh;
   background-color: ${(props) => props.theme.base};
 `;
 
-const AnimatedBall = styled(Animated.View)`
+const AnimatedBall = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 100px;
   background-color: ${(props) => props.theme.green};
+  display: flex;
   justify-content: center;
   align-items: center;
-  shadow-color: #008000;
-  shadow-offset: {
-    width: 0;
-    height: 4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.1);
   }
-  shadow-opacity: 0.3;
-  shadow-radius: 4.65px;
-  elevation: 8;
 `;
 
-const SuggestionText = styled.Text`
+const SuggestionText = styled.div`
   margin-top: 20px;
   font-size: 18px;
   color: ${(props) => props.theme.text};
   text-align: center;
-  font-family: "Poppins_900Black";
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(255, 255, 255, 0.2);
   padding: 10px;
   border-radius: 15px;
-  shadow-color: #000;
-  shadow-offset: {
-    width: 0;
-    height: 2;
-  }
-  shadow-opacity: 0.25;
-  shadow-radius: 3.84px;
-  elevation: 5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 `;
 
-const LinkText = styled.Text`
+const LinkText = styled.a`
   color: ${(props) => props.theme.green};
   margin-top: 10px;
   font-size: 16px;
-  font-family: "Poppins_400Regular";
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 128, 0, 0.2);
   padding: 8px;
   border-radius: 12px;
-  shadow-color: #000;
-  shadow-offset: {
-    width: 0;
-    height: 1;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
   }
-  shadow-opacity: 0.2;
-  shadow-radius: 1.41px;
-  elevation: 2;
 `;
 
-const TopText = styled.Text`
+const TopText = styled.div`
   color: ${(props) => props.theme.green};
   margin-top: 10px;
   font-size: 16px;
-  font-family: "Poppins_400Regular";
+  font-family: 'Poppins', sans-serif;
   background-color: rgba(0, 128, 0, 0.2);
   padding-bottom: 16px;
   padding: 8px;
   border-radius: 12px;
-  shadow-color: #000;
-  shadow-offset: {
-    width: 0;
-    height: 1;
-  }
-  shadow-opacity: 0.2;
-  shadow-radius: 1.41px;
-  elevation: 2;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 `;
 
 const sports = [
@@ -99,7 +83,6 @@ const sports = [
   },
   { name: "Pilates", link: null, icon: "person-falling" },
   { name: "HIIT", link: null, icon: "dumbbell" },
-
   {
     name: "Tischtennis",
     link: "https://www.google.com/maps/search/tischtennis+platte",
@@ -187,7 +170,6 @@ const sports = [
     link: null,
     icon: "chess",
   },
-
   {
     name: "Reiten",
     link: "https://www.google.com/maps/search/reitställe",
@@ -203,13 +185,11 @@ const sports = [
     link: "https://www.google.com/maps/search/surfspots",
     icon: "water",
   },
-
   {
     name: "Eishockey",
     link: "https://www.google.com/maps/search/eishockey+hallen",
     icon: "hockey-puck",
   },
-
   {
     name: "Parkour",
     link: null,
@@ -224,60 +204,26 @@ const SportView = () => {
     icon: string | null;
   } | null>(null);
 
-  const animatedValue = useState(new Animated.Value(1))[0];
-
   const getRandomSport = () => {
     const randomSport = sports[Math.floor(Math.random() * sports.length)];
     setSuggestion(randomSport);
-
-    Animated.sequence([
-      Animated.timing(animatedValue, {
-        toValue: 1.1,
-        duration: 150,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }),
-      Animated.timing(animatedValue, {
-        toValue: 1,
-        duration: 150,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  };
-
-  const openLink = async (url: string) => {
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      await Linking.openURL(url);
-    }
   };
 
   return (
     <Container>
-        <TopText>
-            Finde eine Sportart
-        </TopText>
-      <TouchableOpacity onPress={getRandomSport}>
-        <AnimatedBall
-          style={{
-            transform: [{ scale: animatedValue }],
-          }}
-        >
-          <FontAwesome6 name="dice" size={64} color="#fff" />
-        </AnimatedBall>
-      </TouchableOpacity>
+      <TopText>Finde eine Sportart</TopText>
+      <AnimatedBall onClick={getRandomSport}>
+        <i className="fas fa-dice" style={{ fontSize: '64px', color: '#fff' }}></i>
+      </AnimatedBall>
       {suggestion && (
         <>
           <SuggestionText>
-            {" "}
-            <FontAwesome6 icon={suggestion.icon} size="18" color="#fff" />
+            <i className={`fas fa-${suggestion.icon}`} style={{ fontSize: '18px', color: '#fff' }}></i>
             {suggestion.name}
           </SuggestionText>
           {suggestion.link && (
-            <LinkText onPress={() => openLink(suggestion.link)}>
-              <FontAwesome6 name="magnifying-glass-location" /> In der Nähe
-              finden
+            <LinkText href={suggestion.link} target="_blank">
+              <i className="fas fa-search-location"></i> In der Nähe finden
             </LinkText>
           )}
         </>
